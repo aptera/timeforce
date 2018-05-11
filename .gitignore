@@ -32,4 +32,6 @@ node_modules
 
 # dotenv file that contains secrets
 .env
+
+# Mac files
 *.DS_Store
