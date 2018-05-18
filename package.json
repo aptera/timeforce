@@ -1,7 +1,7 @@
 {
-  "name": "easy-peasy-bot",
-  "version": "1.0.0",
-  "description": "The awesomest bot evar.",
+  "name": "timeforce",
+  "version": "0.1.0",
+  "description": "A helping friendly Slack bot for those of us who track our time in Structure.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,20 +9,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DEGoodmanWilson/easy-peasy-bot-app.git"
+    "url": "git+https://github.com/aptera/timeforce.git"
   },
   "keywords": [
     "slack",
-    "bot"
+    "bot",
+    "structure",
+    "aptera"
   ],
-  "author": "D.E. Goodman-Wilson",
+  "author": "Aptera Software, Inc.",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DEGoodmanWilson/easy-peasy-bot-app/issues"
+    "url": "https://github.com/aptera/timeforce/issues"
   },
-  "homepage": "https://github.com/DEGoodmanWilson/easy-peasy-bot-app#readme",
+  "homepage": "https://github.com/aptera/timeforce",
   "engines": {
-    "node": "5.1.1"
+    "node": "8.11.1"
   },
   "dependencies": {
     "botkit": "^0.6.14",
