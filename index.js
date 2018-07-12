@@ -2,6 +2,10 @@
  * A Bot for Slack!
  */
 
+const appInsights = require("applicationinsights");
+appInsights.setup("5c7067a7-5362-4e09-9778-2cd97a9ed60");
+appInsights.start();
+
  require('dotenv').config()
 
 /**
