@@ -102,6 +102,15 @@ controller.hears('log', 'direct_message', function(bot, message){
     });
 });
 
+controller.on('direct_message', function(bot, message){
+    if(!message.text.match('^log .+')){
+        writeHelpText(message);
+    }
+});
+
+function writeHelpText(message){
+    bot.api.message.reply(message, "Sorry, I didn't understand that. Here are the commands I support:\n`log [text to log]`");
+}
 
 /**
  * AN example of what could be:
