@@ -2,6 +2,10 @@
  * A Bot for Slack!
  */
 
+const appInsights = require("applicationinsights");
+appInsights.setup("5c7067a7-5362-4e09-9778-2cd97a9ed60");
+appInsights.start();
+
  require('dotenv').config()
 
 /**
@@ -91,8 +95,6 @@ controller.on('bot_channel_join', function (bot, message) {
 });
 
 controller.hears('hello', 'direct_message', function (bot, message) {
-    bot.reply(message, 'Hello!');
-
     controller.storage.users.get(message.user, function (error, userData) {
 
         if (!userData) {
@@ -110,9 +112,30 @@ controller.hears('hello', 'direct_message', function (bot, message) {
             }
         });
     });
+    bot.reply(message, {
+        attachments: [{
+            title: 'Would you like to see my supported commands?',
+            callback_id: 'seeSupportedCommandsCallback',
+            attachment_type: 'default',
+            actions: [{
+                "name":"yes",
+                "text":"Yes, please.",
+                "value":"yes",
+                "type":"button"
+            }]
+        }]
+    });
 });
 
-controller.hears('log', 'direct_message', function (bot, message) {
+controller.on('interactive_message_callback', function(bot, message){
+    if(message.callback_id === 'seeSupportedCommandsCallback'){
+            bot.replyInteractive(message,
+                {text: "Here they are:\n" + strSupportedCommands}
+            );
+        }
+});
+
+controller.hears('log', 'direct_message', function(bot, message){
     bot.api.reactions.add({
         timestamp: message.ts,
         channel: message.channel,
@@ -124,20 +147,13 @@ controller.hears('log', 'direct_message', function (bot, message) {
     });
 });
 
+controller.on('message_action', function(bot, message){
+    if(message.callback_id === 'newTimeEntry'){
+        bot.whisper(message, "I'm sorry Dave, I'm afraid I can't do that :robot_face:");
+    }
+});
 
-/**
- * AN example of what could be:
- * Any un-handled direct mention gets a reaction and a pat response!
- */
-//controller.on('direct_message,mention,direct_mention', function (bot, message) {
-//    bot.api.reactions.add({
-//        timestamp: message.ts,
-//        channel: message.channel,
-//        name: 'robot_face',
-//    }, function (err) {
-//        if (err) {
-//            console.log(err)
-//        }
-//        bot.reply(message, 'I heard you loud and clear boss.');
-//    });
-//});
+// LAST handler. Catchall to display supported commands.
+controller.on('direct_message', function(bot, message){
+    bot.reply(message, "Sorry, I didn't understand that. Here are the commands I support:\n`log [text to log]`");
+});
