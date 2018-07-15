@@ -126,6 +126,12 @@ controller.hears('log', 'direct_message', function(bot, message){
     });
 });
 
+controller.on('message_action', function(bot, message){
+    if(message.callback_id === 'newTimeEntry'){
+        bot.whisper(message, "Sorry, I can't do that, Dave :robot_face:");
+    }
+});
+
 // LAST handler. Catchall to display supported commands.
 controller.on('direct_message', function(bot, message){
     bot.reply(message, "Sorry, I didn't understand that. Here are the commands I support:\n`log [text to log]`");
