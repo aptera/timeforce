@@ -128,7 +128,7 @@ controller.hears('log', 'direct_message', function(bot, message){
 
 controller.on('message_action', function(bot, message){
     if(message.callback_id === 'newTimeEntry'){
-        bot.whisper(message, "Sorry, I can't do that, Dave :robot_face:");
+        bot.whisper(message, "I'm sorry Dave, I'm afraid I can't do that :robot_face:");
     }
 });
 
