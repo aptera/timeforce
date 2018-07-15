@@ -91,7 +91,27 @@ controller.on('bot_channel_join', function (bot, message) {
 });
 
 controller.hears('hello', 'direct_message', function (bot, message) {
-    bot.reply(message, 'Hello!');
+    bot.reply(message, {
+        attachments: [{
+            title: 'Would you like to see my supported commands?',
+            callback_id: 'seeSupportedCommandsCallback',
+            attachment_type: 'default',
+            actions: [{
+                "name":"yes",
+                "text":"Yes, please.",
+                "value":"yes",
+                "type":"button"
+            }]
+        }]
+    });
+});
+
+controller.on('interactive_message_callback', function(bot, message){
+    if(message.callback_id === 'seeSupportedCommandsCallback'){
+            bot.replyInteractive(message,
+                {text: "Here they are:\n" + strSupportedCommands}
+            );
+        }
 });
 
 controller.hears('log', 'direct_message', function(bot, message){
