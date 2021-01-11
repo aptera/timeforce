@@ -32,6 +32,6 @@
     "botkit-storage-mongo": "^1.0.2",
     "dotenv": "^5.0.1",
     "hoek": "^4.2.1",
-    "mongodb": "^1.4.39"
+    "mongodb": "^3.1.13"
   }
 }
